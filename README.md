@@ -1,64 +1,59 @@
-<p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400"></a></p>
 
-<p align="center">
-<a href="https://travis-ci.org/laravel/framework"><img src="https://travis-ci.org/laravel/framework.svg" alt="Build Status"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/dt/laravel/framework" alt="Total Downloads"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/v/laravel/framework" alt="Latest Stable Version"></a>
-<a href="https://packagist.org/packages/laravel/framework"><img src="https://img.shields.io/packagist/l/laravel/framework" alt="License"></a>
-</p>
+### Installation and Configuration
 
-## About Laravel
+** Install Deemples Task from your console.**
 
-Laravel is a web application framework with expressive, elegant syntax. We believe development must be an enjoyable and creative experience to be truly fulfilling. Laravel takes the pain out of development by easing common tasks used in many web projects, such as:
+##### Execute these commands below, in order
 
-- [Simple, fast routing engine](https://laravel.com/docs/routing).
-- [Powerful dependency injection container](https://laravel.com/docs/container).
-- Multiple back-ends for [session](https://laravel.com/docs/session) and [cache](https://laravel.com/docs/cache) storage.
-- Expressive, intuitive [database ORM](https://laravel.com/docs/eloquent).
-- Database agnostic [schema migrations](https://laravel.com/docs/migrations).
-- [Robust background job processing](https://laravel.com/docs/queues).
-- [Real-time event broadcasting](https://laravel.com/docs/broadcasting).
+1. Create a database and set its name in your .env file under (DB_DATABASE)
 
-Laravel is accessible, powerful, and provides tools required for large, robust applications.
+2. In your terminal run these commands
+~~~
+ composer install
+~~~
 
-## Learning Laravel
+~~~
+php artisan migrate
+~~~
 
-Laravel has the most extensive and thorough [documentation](https://laravel.com/docs) and video tutorial library of all modern web application frameworks, making it a breeze to get started with the framework.
+~~~
+php artisan db:seed
+~~~
 
-If you don't feel like reading, [Laracasts](https://laracasts.com) can help. Laracasts contains over 1500 video tutorials on a range of topics including Laravel, modern PHP, unit testing, and JavaScript. Boost your skills by digging into our comprehensive video library.
+~~~
+php artisan key:generate
+~~~
 
-## Laravel Sponsors
+~~~
+php artisan vendor:publish
+~~~
 
-We would like to extend our thanks to the following sponsors for funding Laravel development. If you are interested in becoming a sponsor, please visit the Laravel [Patreon page](https://patreon.com/taylorotwell).
+~~~
+Type 0 then press enter
+~~~
 
-### Premium Partners
+~~~
+php artisan optimize
+~~~
 
-- **[Vehikl](https://vehikl.com/)**
-- **[Tighten Co.](https://tighten.co)**
-- **[Kirschbaum Development Group](https://kirschbaumdevelopment.com)**
-- **[64 Robots](https://64robots.com)**
-- **[Cubet Techno Labs](https://cubettech.com)**
-- **[Cyber-Duck](https://cyber-duck.co.uk)**
-- **[Many](https://www.many.co.uk)**
-- **[Webdock, Fast VPS Hosting](https://www.webdock.io/en)**
-- **[DevSquad](https://devsquad.com)**
-- **[Curotec](https://www.curotec.com/services/technologies/laravel/)**
-- **[OP.GG](https://op.gg)**
-- **[WebReinvent](https://webreinvent.com/?utm_source=laravel&utm_medium=github&utm_campaign=patreon-sponsors)**
-- **[Lendio](https://lendio.com)**
+~~~
+php artisan serve
+~~~
 
-## Contributing
+**Explanation to how the signature work**
 
-Thank you for considering contributing to the Laravel framework! The contribution guide can be found in the [Laravel documentation](https://laravel.com/docs/contributions).
+1. I had two ideas to sync records and update it , one was to loop over each and every field and compare it to the existing records in the database which I thought to be efficient but nonscalable one , because it will need extra checks with any extra field added to the shop model and that means extra (if conditions) which leads to breaking one of the SOLID principles (Open for extension Closed for modification) .
 
-## Code of Conduct
+2. The other idea which I implemented was to make a hash function to hash all the fields and save it in the database , compare the hash with the incoming record after hashing its values , if the hash matches so no need to check over all the values from the incoming record, else we update the record with the new data.
 
-In order to ensure that the Laravel community is welcoming to all, please review and abide by the [Code of Conduct](https://laravel.com/docs/contributions#code-of-conduct).
+3. Hash functions are used to validate integrity in technologies (ex: Blockchains) and websites (ex: Github)
 
-## Security Vulnerabilities
 
-If you discover a security vulnerability within Laravel, please send an e-mail to Taylor Otwell via [taylor@laravel.com](mailto:taylor@laravel.com). All security vulnerabilities will be promptly addressed.
+**Assumptions , Validations ,and Instructions**
 
-## License
-
-The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+1. There must be a unique identifier and I assumed it to be the ID.
+2. The uploaded file must be in the (.xslx) format (ex: excel sheet).
+3. If you want to add a new record add a unique numeric id with your data.
+4. Don't leave any empty cell in the file.
+5. If you want to delete a row , don't leave its place empty , in other words , choose (delete entire row) option which is provided in any excel reader.
+6. any change in the ID field will create a new record deleting the old one.
