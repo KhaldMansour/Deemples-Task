@@ -66,7 +66,7 @@ class ShopController extends Controller
         ]);
     }
 
-    public function update(Request $request , $id )
+    public function update(Request $request)
     {
         $data = $this->validate($request, [
             'name' => 'required|string',
@@ -74,7 +74,7 @@ class ShopController extends Controller
             'shoplot' => 'required|numeric',
         ]);
 
-        $shop = Shop::find($id);
+        $shop = Shop::find($request->id);
 
         $shop->update($data);
 

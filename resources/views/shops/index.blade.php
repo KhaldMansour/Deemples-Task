@@ -88,9 +88,7 @@
                 </div>
             <div class="modal-body">
 
-                <form id="edit-form" method="POST" action="{{route('shops.store')}}">
-                        @method('PUT')
-
+                <form id="edit-form" method="POST" action="{{route('shops.update')}}">
                         @csrf
                         <input id="edit-id" type="hidden">
                         <label for="name">Name</label><br>
@@ -197,13 +195,17 @@
 
         let id =$("#edit-id").val();
 
+        let url = $(this).attr('action');
+
+
         $.ajax({
-            type:'PUT',
-            url: "shops" + '/' + id,
+            type:'POST',
+            url: url,
             datatype:'json',
             data:
             {
             '_token': '{{csrf_token()}}',
+            id : id,
             name : $("#edit_shop_name").val(),
             floor: $("#edit_shop_floor").val(),
             shoplot : $("#edit_shop_lotnumber").val(),
